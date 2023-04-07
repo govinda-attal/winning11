@@ -128,6 +128,7 @@ B:
 When app needs to suport large number and/or dynamic nature of topics and validations then validation rules for topics can be maintained in external (database, config-engine) enabling it to fetch this data from same. As Job Description mentioned NoSQL DB - MongoDB the app supports same. In theory this can be replaced by any database or other suitable providers.
 
 * Migrations
+There are many ways to manage migrations. Sample approach is here.
 [load sample article validations in articles collection](./migrations/1_article.go)
 
 
