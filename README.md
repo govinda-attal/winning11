@@ -179,6 +179,6 @@ For simplicity have implemented it as a cli with multiple sub-commands
 ### Local Execution against validation rules in a file
 ```sh
 make build
-# view/change dist/configs/rules.yaml and/or dist/sample-article.json
+# view/change dist/configs/rules.yaml and/or dist/[valid|invalid]-article.json
 make run_local
 ```
