@@ -45,7 +45,7 @@ func TestLocalValidator(t *testing.T) {
 			article: Article{
 				Topic:       "B",
 				Name:        "b",
-				Description: "a very super long description that == 40",
+				Description: "a very super long description that >> 40",
 			},
 			valid: false,
 			errMsgs: []string{

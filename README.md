@@ -56,7 +56,7 @@ However it doesn't mention what this object represents. So made an assumption th
 In _*Go*_,  good package naming convention is driven by Domain Driven Design. Again made an assumption to name package as `feeds`. Thus feeds will provide functionality to work with an `Article` and its _*validations*_
 
 ## Validator
-Exercise warrants to implement a *Validator* and its nature can be defined using interface
+Exercise warrants to implement a *Validator* and its nature can be defined using an interface
 ```go
 type Validator interface {
 	Validate(context.Context, Article) error
@@ -77,7 +77,7 @@ Note: there will be more topic D, E, F …. In the future and combinations of va
 
 From this it clear that rules are different for each topic. However it is not exactly clear on number of topics and/or dynamic nature of validations.
 - Small number of topics and static nature of validation rules
-- Large (or unknown) number and/or dynamic nature of Topic and Validations
+- Large (or unknown) number and/or dynamic nature of topic and validations
 
 Therefore we have two options which can help to decide accordingly. Hence `RulesProvider` interface decouples core validation logic from rules fetcher/provider.
 
@@ -105,8 +105,10 @@ validator:
 ```
 
 ### Local File Rules Provider
-Validation rules for these topics can be configured using local file. The rules configuration file can be in JSON, YAML, etc. For readability picked `YAML` format.
+When app needs to support small number of topics and static validation rules then these rules can be configured using local file. The rules configuration file can be in JSON, YAML, etc. For readability picked `YAML` format.
+
 [Sample Validation Rules](./configs/rules.yaml)
+
 ```yaml
 A:
   name:
@@ -123,7 +125,7 @@ B:
 ```
 
 ### External Rules Provider
-In such case validation rules for topics can be maintained in external (database, config-engine) enabling application to fetch this data from same. As Job Description mentioned NoSQL DB - MongoDB the app supports same. In theory this can be replaced by any database or other suitable providers.
+When app needs to suport large number and/or dynamic nature of topics and validations then validation rules for topics can be maintained in external (database, config-engine) enabling it to fetch this data from same. As Job Description mentioned NoSQL DB - MongoDB the app supports same. In theory this can be replaced by any database or other suitable providers.
 
 * Migrations
 [load sample article validations in articles collection](./migrations/1_article.go)
@@ -159,18 +161,19 @@ func (v *validator) Validate(ctx context.Context, a Article) error {
 In my experience validation requirements can be very dynamic and complex in nature. It such cases third party libraries can be helpful. There are many options. 
 For this example I have picked `github.com/go-ozzo/ozzo-validation`. It helps to implement dynamic custom validations. It provides a nice way to list *all errors* against one or more fields of a struct.
 
+### Custom Validation Rules
 Validation rules of this exercise are slightly different than ones that are offerred out of the box from above library. Hence implemented custom rules in package [validations](./utils/validation/)
 * StrLenBetween - checks if length of the string is between (X,Y) exclusive
 * StrEquals - checks if given value equals a string
 
 ## Nature of Application
-From exercise description it is not clear how to interact with the application. Is it a cli, webserivce, or library?
+From exercise description it is not clear how to interact with the application. Is it a cli, webserivce, or library?. I assume interview panel would like to execute application in some fashion.
 
 For simplicity have implemented it as a cli with multiple sub-commands
 * validate: validate a given article (flag `--article=./sample-article.json`)
 * migrate: helpful to load mongodb (migrate `up`) with validation rules
 
-A sub-command `serve` can be included to run the application as a webservice providing an endpoint to validate an article.
+> Note:If need be a sub-command `serve` can be included to run the application as a webservice providing an endpoint to validate an article.
 
 ### Local Execution against validation rules in a file
 ```sh

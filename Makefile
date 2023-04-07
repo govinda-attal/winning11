@@ -44,8 +44,9 @@ docker_down:
 	@docker compose down
 
 run_local:
-	@cd dist && APP_VALIDATOR_LOCAL=true ./winning11 validate --article sample-article.json
+	@cd dist && APP_VALIDATOR_LOCAL=true ./winning11 validate --article valid-article.json
+	@cd dist && APP_VALIDATOR_LOCAL=true ./winning11 validate --article invalid-article.json
 
 run_db:
 	@cd dist && ./winning11 migrate
-	@cd dist && APP_VALIDATOR_LOCAL=false ./winning11 validate --article sample-article.json
+	@cd dist && APP_VALIDATOR_LOCAL=false ./winning11 validate --article valid-article.json

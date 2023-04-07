@@ -117,7 +117,7 @@ var validateCmd = &cobra.Command{
 		if err := feeds.NewValidator(rp).Validate(ctx, article); err != nil {
 			fmt.Printf("given article with topic (%s) is invalid\n", article.Topic)
 			fmt.Println("error(s):", err)
-			os.Exit(1)
+			return
 		}
 		fmt.Printf("given article with topic (%s) is valid\n", article.Topic)
 	},
