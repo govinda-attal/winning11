@@ -182,3 +182,9 @@ make build
 # view/change dist/configs/rules.yaml and/or dist/[valid|invalid]-article.json
 make run_local
 ```
+
+# Leftovers
+- Unit tests around DB Provider
+- Integration tests
+- NFRs
+- Explicit DB Migrate `Down`
