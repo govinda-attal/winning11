@@ -1,0 +1,18 @@
+A:
+  name:
+    value: a
+  desc:
+    lenMoreThan: 10
+    lenLessThan: 100
+
+B:
+  name: 
+    value: b
+  desc:
+    lenLessThan: 40
+
+C:
+  name: 
+    value: c
+  desc:
+    lenMoreThan: 10

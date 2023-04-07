@@ -1,0 +1,9 @@
+log:
+  level: DEBUG
+  format: TEXT
+validator:
+  local: true
+  rulesPath: ./configs/rules.yaml
+  db:
+    uri: mongodb://root:password@localhost:27017/?authSource=admin
+    name: winning11
